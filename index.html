@@ -21,6 +21,24 @@
     width: 90%;
     max-width: 400px;
     z-index: 2;
+    max-height: 100vh;
+    overflow-y: auto;
+    overflow-x: hidden;
+    scrollbar-width: thin;
+    scrollbar-color: #ff4d88 #ffd6e8;
+  }
+
+  .container::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  .container::-webkit-scrollbar-track {
+    background: #ffd6e8;
+  }
+
+  .container::-webkit-scrollbar-thumb {
+    background: #ff4d88;
+    border-radius: 10px;
   }
 
   h1 { color: #e60073; font-size: 1.7rem; }
@@ -89,6 +107,7 @@
     padding: 0 10px 20px 10px;
     scrollbar-width: thin;
     scrollbar-color: #ff4d88 #ffeef5;
+    scroll-behavior: smooth;
   }
 
   #reasonsList::-webkit-scrollbar {
@@ -132,6 +151,88 @@
       opacity: 1;
       transform: translateX(0);
     }
+  }
+
+  /* Love letter */
+  #loveLetter {
+    margin-top: 30px;
+    margin-bottom: 40px;
+    perspective: 1000px;
+    display: none;
+  }
+
+  .envelope {
+    width: 280px;
+    height: 180px;
+    margin: 0 auto;
+    position: relative;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(255, 77, 136, 0.3);
+  }
+
+  .letter-paper {
+    width: 260px;
+    height: 520px;
+    background: linear-gradient(to bottom, #fff9f9, #fff);
+    border: 2px solid #ff4d88;
+    border-radius: 8px;
+    padding: 20px;
+    margin: -140px auto 0;
+    position: relative;
+    transform-origin: top center;
+    animation: unfoldLetter 2s ease-out forwards;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+    opacity: 0;
+  }
+
+  @keyframes unfoldLetter {
+    0% {
+      transform: rotateX(90deg) scale(0.5);
+      opacity: 0;
+    }
+    50% {
+      transform: rotateX(45deg) scale(0.8);
+      opacity: 0.5;
+    }
+    100% {
+      transform: rotateX(0deg) scale(1);
+      opacity: 1;
+    }
+  }
+
+  .letter-content {
+    text-align: left;
+    color: #333;
+    font-size: 0.9rem;
+    line-height: 1.6;
+    animation: fadeInText 1s ease-out 2s forwards;
+    opacity: 0;
+  }
+
+  @keyframes fadeInText {
+    to {
+      opacity: 1;
+    }
+  }
+
+  .letter-content .salutation {
+    color: #ff1a75;
+    font-weight: bold;
+    font-size: 1.1rem;
+    margin-bottom: 15px;
+  }
+
+  .letter-content .signature {
+    margin-top: 20px;
+    text-align: right;
+    color: #ff1a75;
+    font-style: italic;
+    font-weight: bold;
+  }
+
+  .letter-content p {
+    margin: 10px 0;
   }
 
   /* Hearts animation */
@@ -193,6 +294,20 @@
     </video>
 
     <div id="reasonsList"></div>
+
+    <div id="loveLetter">
+      <div class="envelope"></div>
+      <div class="letter-paper">
+        <div class="letter-content">
+          <div class="salutation">My Dearest Bhakti,</div>
+          <p>As I sit here thinking about us, my heart overflows with love for you. You are my sunshine on cloudy days, my comfort in difficult times, and my greatest joy.</p>
+          <p>Every moment with you is a treasure, and I am grateful for every laugh, every conversation, and every memory we create together.</p>
+          <p>Thank you for being you - your love, and for choosing me as your life partner. You make everything better just by being in it.</p>
+          <p>I promise to love you, cherish you, and support you today, tomorrow, and always.</p>
+          <div class="signature">Forever yours,<br>Your Aadi 💖</div>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
 
@@ -211,57 +326,78 @@ document.addEventListener("DOMContentLoaded", () => {
   const video = document.getElementById("loveVideo");
   const musicToggle = document.getElementById("musicToggle");
   const reasonsList = document.getElementById("reasonsList");
+  const loveLetter = document.getElementById("loveLetter");
 
   let isMusicPlaying = false;
 
   // Reasons why I love you
   const reasons = [
     "Your smile lights up my entire day",
-    "The way you laugh makes everything better",
-    "You understand me like no one else does",
-    "Your dedication inspire me",
-    "You make me want to be a best person for you",
-    "The way you care for me",
-    "Your beautiful eyes that I could get lost in",
-    "How you always know what I want to say",
-    "The little things you do that show you care",
-    "Your kisses and hugs",
-    "How you make ordinary moments feel special",
-    "The way you hold my hand and make me feel safe",
-    "Your intelligence and the way you think about things",
-    "How supportive you are of our dreams and goals",
-    "Your cute quirks that make you uniquely you",
-    "The way you brighten my every day",
-    "How understanding you are with me",
-    "The dreams we have together, big and small",
-    "How you make me feel loved every single day",
-    "Your beautiful heart and genuine soul",
-    "The way you believe in us and our future together",
-    "Simply everything about you, baccha 💖",
-    ""
+    "The way you laugh makes everything better"
+    // "You understand me like no one else does",
+    // "Your dedication inspire me",
+    // "You make me want to be a best person for you",
+    // "The way you care for me",
+    // "Your beautiful eyes that I could get lost in",
+    // "How you always know what I want to say",
+    // "The little things you do that show you care",
+    // "Your kisses and hugs",
+    // "How you make ordinary moments feel special",
+    // "The way you hold my hand and make me feel safe",
+    // "Your intelligence and the way you think about things",
+    // "How supportive you are of our dreams and goals",
+    // "Your cute quirks that make you uniquely you",
+    // "The way you brighten my every day",
+    // "How understanding you are with me",
+    // "The dreams we have together, big and small",
+    // "How you make me feel loved every single day",
+    // "Your beautiful heart and genuine soul",
+    // "The way you believe in us and our future together",
+    // "Simply everything about you, baccha 💖",
   ];
 
   // Animate reasons appearing one by one
   function showReasons() {
     reasons.forEach((reason, index) => {
       setTimeout(() => {
+        // Skip empty reasons
+
         const reasonItem = document.createElement("div");
         reasonItem.className = "reason-item";
-        reasonItem.innerHTML = `
+        if (!reason){
+            reasonItem.innerHTML = `
+          <span class="text">${reason}</span>
+        `;
+        }
+        else{
+            reasonItem.innerHTML = `
           <span class="number">${index + 1}.</span>
           <span class="text">${reason}</span>
         `;
+        }
+
         reasonItem.style.animationDelay = "0s";
         reasonsList.appendChild(reasonItem);
 
-        // Auto-scroll to show new reason
+        // Auto-scroll to show new reason - wait for animation to start
         setTimeout(() => {
-          if (index > 3) {
-            reasonsList.scrollTop = reasonsList.scrollHeight;
-          }
-        }, 100);
+          // Scroll to bottom to show latest reason
+          reasonsList.scrollTop = reasonsList.scrollHeight;
+        }, 200);
       }, index * 3000); // 800ms delay between each reason
     });
+
+    // Show love letter after all reasons are displayed
+    // Calculate total time: (number of reasons - 1) * delay + extra time for last animation
+    const totalReasons = reasons.filter(r => r).length; // Count non-empty reasons
+    const letterDelay = (totalReasons - 1) * 3000 + 3000; // Extra 4 seconds after last reason
+    setTimeout(() => {
+      loveLetter.style.display = "block";
+      // Scroll to show the letter
+      setTimeout(() => {
+        loveLetter.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      }, 3000);
+    }, letterDelay);
   }
 
   // Music toggle button
@@ -343,7 +479,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // Show reasons list after video ends (31 seconds)
     setTimeout(() => {
       showReasons();
-    }, 31000);
+    }, 1000);
 
     // play music and video safely
     bgMusic.play().then(() => {
