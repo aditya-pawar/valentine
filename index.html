@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Baseline Test</title>
+  <title>Valentine 💖</title>
 
   <style>
     body {
@@ -52,6 +52,18 @@
       transform: translateX(-50%);
       top: 90px;
     }
+
+    #loveMessage {
+      display: none;
+      margin-top: 20px;
+    }
+
+    video {
+      width: 100%;
+      max-width: 320px;
+      border-radius: 15px;
+      margin-top: 15px;
+    }
   </style>
 </head>
 
@@ -59,11 +71,18 @@
 
   <div class="container">
     <h1>I love you Bhakti ❤️</h1>
-    <h2>Will you be my Valentine?</h2>
+    <h2 id="question">Will you be my Valentine?</h2>
 
     <div class="buttons" id="buttons">
       <button id="yes">Yes 💖</button>
       <button id="no">Are you sure?? 😏</button>
+    </div>
+
+    <div id="loveMessage">
+      <h2>I love you forever ❤️</h2>
+      <video controls autoplay>
+        <source src="love.mp4" type="video/mp4">
+      </video>
     </div>
   </div>
 
@@ -72,6 +91,8 @@
       const noBtn = document.getElementById("no");
       const yesBtn = document.getElementById("yes");
       const buttons = document.getElementById("buttons");
+      const question = document.getElementById("question");
+      const loveMessage = document.getElementById("loveMessage");
 
       const texts = [
         "Are you sure?? 😏",
@@ -94,8 +115,9 @@
       noBtn.addEventListener("touchstart", moveNo);
 
       yesBtn.addEventListener("click", () => {
-        console.log("YES clicked");
-        alert("Yes button works");
+        buttons.style.display = "none";
+        question.style.display = "none";
+        loveMessage.style.display = "block";
       });
     });
   </script>
