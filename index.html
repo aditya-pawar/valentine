@@ -1,17 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>My Valentine 💖</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Valentine 💖</title>
 
   <style>
     body {
       margin: 0;
       height: 100vh;
-      background: linear-gradient(to bottom, #ffd6e8, #ffeef5);
+      background: #ffd6e8;
       font-family: Arial, sans-serif;
-      overflow: hidden;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -19,51 +18,32 @@
 
     .container {
       text-align: center;
-      padding: 20px;
-      max-width: 90%;
+      width: 90%;
     }
 
-    h1 {
-      color: #e60073;
-      font-size: 1.8rem;
-      margin-bottom: 10px;
-    }
-
-    h2 {
-      color: #ff1a75;
-      font-size: 1.4rem;
-    }
-
-    .buttons {
-      margin-top: 30px;
-      position: relative;
-      height: 160px;
-    }
+    h1 { color: #e60073; }
+    h2 { color: #ff1a75; }
 
     button {
       padding: 14px 26px;
       font-size: 1.1rem;
-      border: none;
       border-radius: 12px;
-      cursor: pointer;
-      position: absolute;
+      border: none;
+      margin: 10px;
     }
 
-    #yes {
-      background-color: #ff4d88;
-      color: white;
-      left: 50%;
-      transform: translateX(-50%);
-      top: 20px;
-    }
+    #yes { background: #ff4d88; color: white; }
+    #no { background: #ccc; }
+  </style>
+</head>
 
-    #no {
-      background-color: #ccc;
-      left: 50%;
-      transform: translateX(-50%);
-      top: 90px;
-    }
+<body>
+  <div class="container">
+    <h1>I love you Bhakti ❤️<br>I love you so much baccha 💖</h1>
+    <h2>Will you be my Valentine?</h2>
 
-    #loveMessage {
-      display: none;
-      ma
+    <button id="yes">Yes 💖</button>
+    <button id="no">Are you sure?? 😏</button>
+  </div>
+</body>
+</html>
