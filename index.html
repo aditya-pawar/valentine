@@ -44,6 +44,25 @@
   #yes { background: #ff4d88; color: white; left: 50%; transform: translateX(-50%); top: 20px; }
   #no { background: #ccc; left: 50%; transform: translateX(-50%); top: 90px; }
 
+  #musicToggle {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    padding: 10px 20px;
+    background: rgba(255, 77, 136, 0.8);
+    color: white;
+    border: none;
+    border-radius: 20px;
+    font-size: 1rem;
+    cursor: pointer;
+    z-index: 1000;
+    transition: background 0.3s;
+  }
+
+  #musicToggle:hover {
+    background: rgba(255, 77, 136, 1);
+  }
+
   #loveMessage { display: none; margin-top: 20px; }
   video { width: 100%; max-width: 320px; border-radius: 15px; margin-top: 15px; }
 
@@ -66,6 +85,8 @@
 </head>
 
 <body>
+
+<button id="musicToggle">🔇 Music Off</button>
 
 <div class="container">
   <h1>I love you Bhakti ❤️<br>I love you so much baccha 💖</h1>
@@ -97,20 +118,72 @@ document.addEventListener("DOMContentLoaded", () => {
   const loveMessage = document.getElementById("loveMessage");
   const bgMusic = document.getElementById("bgMusic");
   const video = document.getElementById("loveVideo");
+  const musicToggle = document.getElementById("musicToggle");
+
+  let isMusicPlaying = false;
+
+  // Music toggle button
+  musicToggle.addEventListener("click", () => {
+    if (isMusicPlaying) {
+      bgMusic.pause();
+      musicToggle.textContent = "🔇 Music Off";
+      isMusicPlaying = false;
+    } else {
+      bgMusic.play().catch(() => console.log("Music playback failed"));
+      musicToggle.textContent = "🔊 Music On";
+      isMusicPlaying = true;
+    }
+  });
 
   const texts = [
     "Are you sure?? 😏",
     "Think again 😜",
     "Nope 😂",
     "Nice try 😈",
-    "Still no? 😘"
+    "Still no? 😘",
+    "Come on now 💕",
+    "Really? 🥺",
+    "Please? 💖",
+    "You know you want to 😉",
+    "Don't be shy 😊",
+    "I'm waiting 💗",
+    "One more chance? 🌹",
+    "Pretty please? 🥰",
+    "You'll regret it 😋",
+    "Just say yes! 💞"
   ];
 
-  // "No" button moves
+  // "No" button moves (avoids overlapping with "Yes")
   function moveNo() {
     const rect = buttons.getBoundingClientRect();
-    noBtn.style.left = Math.random() * (rect.width - noBtn.offsetWidth) + "px";
-    noBtn.style.top = Math.random() * (rect.height - noBtn.offsetHeight) + "px";
+    const yesRect = yesBtn.getBoundingClientRect();
+    const buttonsRect = buttons.getBoundingClientRect();
+
+    let newLeft, newTop;
+    let attempts = 0;
+    const maxAttempts = 20;
+
+    do {
+      newLeft = Math.random() * (rect.width - noBtn.offsetWidth);
+      newTop = Math.random() * (rect.height - noBtn.offsetHeight);
+
+      // Check if new position overlaps with Yes button
+      const noLeft = buttonsRect.left + newLeft;
+      const noRight = noLeft + noBtn.offsetWidth;
+      const noTop = buttonsRect.top + newTop;
+      const noBottom = noTop + noBtn.offsetHeight;
+
+      const overlap = !(noRight < yesRect.left ||
+                       noLeft > yesRect.right ||
+                       noBottom < yesRect.top ||
+                       noTop > yesRect.bottom);
+
+      if (!overlap) break;
+      attempts++;
+    } while (attempts < maxAttempts);
+
+    noBtn.style.left = newLeft + "px";
+    noBtn.style.top = newTop + "px";
     noBtn.textContent = texts[Math.floor(Math.random() * texts.length)];
   }
   noBtn.addEventListener("mouseover", moveNo);
@@ -123,7 +196,11 @@ document.addEventListener("DOMContentLoaded", () => {
     loveMessage.style.display = "block";
 
     // play music and video safely
-    bgMusic.play().catch(() => console.log("Music autoplay blocked"));
+    bgMusic.play().then(() => {
+      isMusicPlaying = true;
+      musicToggle.textContent = "🔊 Music On";
+    }).catch(() => console.log("Music autoplay blocked"));
+
     video.play().catch((err) => {
       console.log("Video autoplay blocked:", err);
       // Video will still be visible with controls, user can click to play
