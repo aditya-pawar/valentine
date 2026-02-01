@@ -2,148 +2,68 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>My Valentine 💖</title>
 
   <style>
     body {
-      background: linear-gradient(to bottom, #ffd6e8, #ffeef5);
-      font-family: 'Arial', sans-serif;
-      text-align: center;
-      overflow: hidden;
       margin: 0;
-      padding-top: 80px;
+      height: 100vh;
+      background: linear-gradient(to bottom, #ffd6e8, #ffeef5);
+      font-family: Arial, sans-serif;
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .container {
+      text-align: center;
+      padding: 20px;
+      max-width: 90%;
     }
 
     h1 {
       color: #e60073;
-      font-size: 2.5rem;
+      font-size: 1.8rem;
       margin-bottom: 10px;
     }
 
     h2 {
       color: #ff1a75;
+      font-size: 1.4rem;
+    }
+
+    .buttons {
+      margin-top: 30px;
+      position: relative;
+      height: 160px;
     }
 
     button {
-      padding: 15px 30px;
-      font-size: 1.2rem;
+      padding: 14px 26px;
+      font-size: 1.1rem;
       border: none;
       border-radius: 12px;
       cursor: pointer;
-      margin: 20px;
+      position: absolute;
     }
 
     #yes {
       background-color: #ff4d88;
       color: white;
+      left: 50%;
+      transform: translateX(-50%);
+      top: 20px;
     }
 
     #no {
       background-color: #ccc;
-      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      top: 90px;
     }
 
     #loveMessage {
       display: none;
-      margin-top: 30px;
-    }
-
-    video {
-      width: 300px;
-      border-radius: 15px;
-      margin-top: 20px;
-    }
-
-    /* ❤️ Floating hearts */
-    .heart {
-      position: absolute;
-      bottom: -20px;
-      color: #ff4d88;
-      font-size: 20px;
-      animation: floatUp 6s linear infinite;
-      opacity: 0.7;
-    }
-
-    @keyframes floatUp {
-      from {
-        transform: translateY(0);
-        opacity: 1;
-      }
-      to {
-        transform: translateY(-110vh);
-        opacity: 0;
-      }
-    }
-  </style>
-</head>
-
-<body>
-
-  <h1>I love you Bhakti ❤️<br>I love you so much baccha 🥹💖</h1>
-  <h2>Will you be my Valentine? 💘</h2>
-
-  <button id="yes">Yes 💖</button>
-  <button id="no">Are you sure?? 😏</button>
-
-  <div id="loveMessage">
-    <h2>I love you forever ❤️</h2>
-    <video controls autoplay>
-      <source src="love.mp4" type="video/mp4">
-    </video>
-  </div>
-
-  <!-- 🎵 Background Music -->
-  <audio id="bgMusic" loop>
-    <source src="music.mp3" type="audio/mpeg">
-  </audio>
-
-  <script>
-    const noBtn = document.getElementById("no");
-    const yesBtn = document.getElementById("yes");
-    const loveMessage = document.getElementById("loveMessage");
-    const bgMusic = document.getElementById("bgMusic");
-
-    const funnyTexts = [
-      "Are you sure?? 😏",
-      "Think again 😜",
-      "Nope nope nope 😂",
-      "You can't escape 😈",
-      "Nice try 😎",
-      "Wrong choice 😘"
-    ];
-
-    noBtn.addEventListener("click", () => {
-      const x = Math.random() * (window.innerWidth - 120);
-      const y = Math.random() * (window.innerHeight - 60);
-      noBtn.style.left = x + "px";
-      noBtn.style.top = y + "px";
-
-      const randomText = funnyTexts[Math.floor(Math.random() * funnyTexts.length)];
-      noBtn.innerText = randomText;
-    });
-
-    yesBtn.addEventListener("click", () => {
-      document.querySelector("h2").style.display = "none";
-      yesBtn.style.display = "none";
-      noBtn.style.display = "none";
-      loveMessage.style.display = "block";
-      bgMusic.play();
-    });
-
-    // ❤️ Create floating hearts
-    function createHeart() {
-      const heart = document.createElement("div");
-      heart.className = "heart";
-      heart.innerText = "❤️";
-      heart.style.left = Math.random() * 100 + "vw";
-      heart.style.fontSize = Math.random() * 20 + 15 + "px";
-      document.body.appendChild(heart);
-
-      setTimeout(() => heart.remove(), 6000);
-    }
-
-    setInterval(createHeart, 300);
-  </script>
-
-</body>
-</html>
+      ma
