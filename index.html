@@ -86,6 +86,11 @@
     </div>
   </div>
 
+  <!-- 🎵 Background music -->
+  <audio id="bgMusic" loop>
+    <source src="music.mp3" type="audio/mpeg">
+  </audio>
+
   <script>
     document.addEventListener("DOMContentLoaded", () => {
       const noBtn = document.getElementById("no");
@@ -93,6 +98,7 @@
       const buttons = document.getElementById("buttons");
       const question = document.getElementById("question");
       const loveMessage = document.getElementById("loveMessage");
+      const bgMusic = document.getElementById("bgMusic");
 
       const texts = [
         "Are you sure?? 😏",
@@ -118,6 +124,7 @@
         buttons.style.display = "none";
         question.style.display = "none";
         loveMessage.style.display = "block";
+        bgMusic.play();
       });
     });
   </script>
