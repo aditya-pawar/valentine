@@ -78,7 +78,7 @@
 
   <div id="loveMessage">
     <h2>I love you forever ❤️</h2>
-    <video id="loveVideo" controls muted playsinline>
+    <video id="loveVideo" controls muted playsinline autoplay preload="auto">
       <source src="love.mp4" type="video/mp4">
     </video>
   </div>
@@ -124,7 +124,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // play music and video safely
     bgMusic.play().catch(() => console.log("Music autoplay blocked"));
-    video.play().catch(() => console.log("Video autoplay blocked"));
+    video.play().catch((err) => {
+      console.log("Video autoplay blocked:", err);
+      // Video will still be visible with controls, user can click to play
+    });
   });
 
   // Hearts
