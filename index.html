@@ -60,4 +60,90 @@
       bottom: -20px;
       color: #ff4d88;
       font-size: 20px;
-      animation: floatUp 6s linear
+      animation: floatUp 6s linear infinite;
+      opacity: 0.7;
+    }
+
+    @keyframes floatUp {
+      from {
+        transform: translateY(0);
+        opacity: 1;
+      }
+      to {
+        transform: translateY(-110vh);
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <h1>I love you Bhakti ❤️<br>I love you so much baccha 🥹💖</h1>
+  <h2>Will you be my Valentine? 💘</h2>
+
+  <button id="yes">Yes 💖</button>
+  <button id="no">Are you sure?? 😏</button>
+
+  <div id="loveMessage">
+    <h2>I love you forever ❤️</h2>
+    <video controls autoplay>
+      <source src="love.mp4" type="video/mp4">
+    </video>
+  </div>
+
+  <!-- 🎵 Background Music -->
+  <audio id="bgMusic" loop>
+    <source src="music.mp3" type="audio/mpeg">
+  </audio>
+
+  <script>
+    const noBtn = document.getElementById("no");
+    const yesBtn = document.getElementById("yes");
+    const loveMessage = document.getElementById("loveMessage");
+    const bgMusic = document.getElementById("bgMusic");
+
+    const funnyTexts = [
+      "Are you sure?? 😏",
+      "Think again 😜",
+      "Nope nope nope 😂",
+      "You can't escape 😈",
+      "Nice try 😎",
+      "Wrong choice 😘"
+    ];
+
+    noBtn.addEventListener("click", () => {
+      const x = Math.random() * (window.innerWidth - 120);
+      const y = Math.random() * (window.innerHeight - 60);
+      noBtn.style.left = x + "px";
+      noBtn.style.top = y + "px";
+
+      const randomText = funnyTexts[Math.floor(Math.random() * funnyTexts.length)];
+      noBtn.innerText = randomText;
+    });
+
+    yesBtn.addEventListener("click", () => {
+      document.querySelector("h2").style.display = "none";
+      yesBtn.style.display = "none";
+      noBtn.style.display = "none";
+      loveMessage.style.display = "block";
+      bgMusic.play();
+    });
+
+    // ❤️ Create floating hearts
+    function createHeart() {
+      const heart = document.createElement("div");
+      heart.className = "heart";
+      heart.innerText = "❤️";
+      heart.style.left = Math.random() * 100 + "vw";
+      heart.style.fontSize = Math.random() * 20 + 15 + "px";
+      document.body.appendChild(heart);
+
+      setTimeout(() => heart.remove(), 6000);
+    }
+
+    setInterval(createHeart, 300);
+  </script>
+
+</body>
+</html>
