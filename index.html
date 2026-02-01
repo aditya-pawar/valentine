@@ -80,9 +80,9 @@
 
     <div id="loveMessage">
       <h2>I love you forever ❤️</h2>
-      <video controls autoplay muted playsinline>
-        <source src="love.mp4" type="video/mp4">
-      </video>
+        <video id="loveVideo" controls autoplay muted playsinline>
+          <source src="love.mp4" type="video/mp4">
+        </video>
     </div>
   </div>
 
@@ -125,9 +125,8 @@
         question.style.display = "none";
         loveMessage.style.display = "block";
       
-        bgMusic.play();
-      
-        const video = loveMessage.querySelector("video");
+        bgMusic.play(); // starts music
+        const video = document.getElementById("loveVideo");
         video.play().catch(() => {
           console.log("Video autoplay blocked, user can press play");
         });
