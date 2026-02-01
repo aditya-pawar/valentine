@@ -14,36 +14,82 @@
       display: flex;
       justify-content: center;
       align-items: center;
+      overflow: hidden;
     }
 
     .container {
       text-align: center;
       width: 90%;
+      max-width: 400px;
     }
 
     h1 { color: #e60073; }
     h2 { color: #ff1a75; }
+
+    .buttons {
+      position: relative;
+      height: 150px;
+      margin-top: 20px;
+    }
 
     button {
       padding: 14px 26px;
       font-size: 1.1rem;
       border-radius: 12px;
       border: none;
-      margin: 10px;
+      position: absolute;
+      cursor: pointer;
     }
 
-    #yes { background: #ff4d88; color: white; }
-    #no { background: #ccc; }
+    #yes {
+      background: #ff4d88;
+      color: white;
+      left: 50%;
+      transform: translateX(-50%);
+      top: 20px;
+    }
+
+    #no {
+      background: #ccc;
+      left: 50%;
+      transform: translateX(-50%);
+      top: 90px;
+    }
   </style>
 </head>
 
 <body>
+
   <div class="container">
     <h1>I love you Bhakti ❤️<br>I love you so much baccha 💖</h1>
     <h2>Will you be my Valentine?</h2>
 
-    <button id="yes">Yes 💖</button>
-    <button id="no">Are you sure?? 😏</button>
+    <div class="buttons">
+      <button id="yes">Yes 💖</button>
+      <button id="no">Are you sure?? 😏</button>
+    </div>
   </div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const noBtn = document.getElementById("no");
+      const area = document.querySelector(".buttons");
+
+      noBtn.addEventListener("mouseover", moveButton);
+      noBtn.addEventListener("touchstart", moveButton);
+
+      function moveButton() {
+        const rect = area.getBoundingClientRect();
+
+        const x = Math.random() * (rect.width - noBtn.offsetWidth);
+        const y = Math.random() * (rect.height - noBtn.offsetHeight);
+
+        noBtn.style.left = x + "px";
+        noBtn.style.top = y + "px";
+        noBtn.innerText = "Nope 😜";
+      }
+    });
+  </script>
+
 </body>
 </html>
