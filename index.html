@@ -23,9 +23,9 @@
     z-index: 2;
     max-height: 100vh;
     overflow-y: auto;
-    overflow-x: hidden;
     scrollbar-width: thin;
     scrollbar-color: #ff4d88 #ffd6e8;
+    padding: 0 20px;
   }
 
   .container::-webkit-scrollbar {
@@ -47,7 +47,10 @@
   .buttons {
     position: relative;
     height: 160px;
+    width: 100%;
+    min-width: 350px;
     margin-top: 25px;
+    overflow: visible;
   }
 
   button {
@@ -57,6 +60,8 @@
     border-radius: 12px;
     border: none;
     cursor: pointer;
+    white-space: nowrap;
+    overflow: visible;
   }
 
   #yes { background: #ff4d88; color: white; left: 50%; transform: translateX(-50%); top: 20px; }
@@ -333,27 +338,27 @@ document.addEventListener("DOMContentLoaded", () => {
   // Reasons why I love you
   const reasons = [
     "Your smile lights up my entire day",
-    "The way you laugh makes everything better"
-    // "You understand me like no one else does",
-    // "Your dedication inspire me",
-    // "You make me want to be a best person for you",
-    // "The way you care for me",
-    // "Your beautiful eyes that I could get lost in",
-    // "How you always know what I want to say",
-    // "The little things you do that show you care",
-    // "Your kisses and hugs",
-    // "How you make ordinary moments feel special",
-    // "The way you hold my hand and make me feel safe",
-    // "Your intelligence and the way you think about things",
-    // "How supportive you are of our dreams and goals",
-    // "Your cute quirks that make you uniquely you",
-    // "The way you brighten my every day",
-    // "How understanding you are with me",
-    // "The dreams we have together, big and small",
-    // "How you make me feel loved every single day",
-    // "Your beautiful heart and genuine soul",
-    // "The way you believe in us and our future together",
-    // "Simply everything about you, baccha 💖",
+    "The way you laugh makes everything better",
+    "You understand me like no one else does",
+    "Your dedication inspire me",
+    "You make me want to be a best person for you",
+    "The way you care for me",
+    "Your beautiful eyes that I could get lost in",
+    "How you always know what I want to say",
+    "The little things you do that show you care",
+    "Your kisses and hugs",
+    "How you make ordinary moments feel special",
+    "The way you hold my hand and make me feel safe",
+    "Your intelligence and the way you think about things",
+    "How supportive you are of our dreams and goals",
+    "Your cute quirks that make you uniquely you",
+    "The way you brighten my every day",
+    "How understanding you are with me",
+    "The dreams we have together, big and small",
+    "How you make me feel loved every single day",
+    "Your beautiful heart and genuine soul",
+    "The way you believe in us and our future together",
+    "Simply everything about you, baccha 💖",
   ];
 
   // Animate reasons appearing one by one
@@ -414,7 +419,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   const texts = [
-    "Are you sure?? 😏",
+    "Are you sure??😏",
     "Think again 😜",
     "Nope 😂",
     "Nice try 😈",
@@ -422,12 +427,10 @@ document.addEventListener("DOMContentLoaded", () => {
     "Come on now 💕",
     "Really? 🥺",
     "Please? 💖",
-    "You know you want to 😉",
     "Don't be shy 😊",
     "I'm waiting 💗",
     "One more chance? 🌹",
     "Pretty please? 🥰",
-    "You'll regret it 😋",
     "Just say yes! 💞"
   ];
 
@@ -439,11 +442,43 @@ document.addEventListener("DOMContentLoaded", () => {
 
     let newLeft, newTop;
     let attempts = 0;
-    const maxAttempts = 20;
+    const maxAttempts = 40;
+    const padding = 30; // Increased padding from edges to prevent clipping
+
+    // Define safe zones: left, right, top-left, top-right, bottom-left, bottom-right
+    const zones = [
+      // Left side
+      () => ({
+        left: padding,
+        top: padding + Math.random() * (rect.height - noBtn.offsetHeight - padding * 2)
+      }),
+      // Right side
+      () => ({
+        left: rect.width - noBtn.offsetWidth - padding,
+        top: padding + Math.random() * (rect.height - noBtn.offsetHeight - padding * 2)
+      }),
+      // Top area
+      () => ({
+        left: padding + Math.random() * (rect.width - noBtn.offsetWidth - padding * 2),
+        top: padding
+      }),
+      // Bottom area
+      () => ({
+        left: padding + Math.random() * (rect.width - noBtn.offsetWidth - padding * 2),
+        top: rect.height - noBtn.offsetHeight - padding
+      }),
+      // Random anywhere
+      () => ({
+        left: padding + Math.random() * (rect.width - noBtn.offsetWidth - padding * 2),
+        top: padding + Math.random() * (rect.height - noBtn.offsetHeight - padding * 2)
+      })
+    ];
 
     do {
-      newLeft = Math.random() * (rect.width - noBtn.offsetWidth);
-      newTop = Math.random() * (rect.height - noBtn.offsetHeight);
+      // Pick a random zone strategy
+      const zone = zones[Math.floor(Math.random() * zones.length)]();
+      newLeft = zone.left;
+      newTop = zone.top;
 
       // Check if new position overlaps with Yes button
       const noLeft = buttonsRect.left + newLeft;
@@ -479,7 +514,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // Show reasons list after video ends (31 seconds)
     setTimeout(() => {
       showReasons();
-    }, 1000);
+    }, 31000);
 
     // play music and video safely
     bgMusic.play().then(() => {
