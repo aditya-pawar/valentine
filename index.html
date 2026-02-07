@@ -571,9 +571,9 @@ document.addEventListener("DOMContentLoaded", () => {
       // Animate position with physics
       let x = startX;
       let y = startY;
-      const gravity = 500; // pixels per second squared
+      const gravity = 300; // pixels per second squared
       const startTime = Date.now();
-      const duration = 10000; // 3 seconds
+      const duration = 3000; // 3 seconds
 
       function animate() {
         const elapsed = (Date.now() - startTime) / 1000; // seconds
