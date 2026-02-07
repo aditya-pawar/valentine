@@ -276,6 +276,180 @@
       opacity: 0;
     }
   }
+
+  /* Photo Album */
+  #photoAlbum {
+    margin-top: 40px;
+    margin-bottom: 40px;
+    display: none;
+  }
+
+  .album-title {
+    color: #ff1a75;
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+
+  .slideshow-container {
+    position: relative;
+    max-width: 320px;
+    margin: 0 auto;
+    background: rgba(255, 255, 255, 0.5);
+    border-radius: 15px;
+    padding: 20px;
+    box-shadow: 0 8px 30px rgba(255, 77, 136, 0.3);
+  }
+
+  .slide {
+    display: none;
+    animation: fadeSlide 0.8s ease-in-out;
+  }
+
+  .slide.active {
+    display: block;
+  }
+
+  .slide img {
+    width: 100%;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  }
+
+  @keyframes fadeSlide {
+    from {
+      opacity: 0;
+      transform: scale(0.95);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  .slide-caption {
+    text-align: center;
+    color: #333;
+    margin-top: 10px;
+    font-size: 0.9rem;
+    font-style: italic;
+  }
+
+  .prev, .next {
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: auto;
+    padding: 12px;
+    color: white;
+    background: rgba(255, 77, 136, 0.7);
+    font-weight: bold;
+    font-size: 1.2rem;
+    border-radius: 50%;
+    user-select: none;
+    transition: background 0.3s;
+  }
+
+  .prev:hover, .next:hover {
+    background: rgba(255, 77, 136, 1);
+  }
+
+  .prev {
+    left: -15px;
+  }
+
+  .next {
+    right: -15px;
+  }
+
+  .slide-counter {
+    text-align: center;
+    color: #ff4d88;
+    font-weight: bold;
+    margin-top: 15px;
+    font-size: 0.9rem;
+  }
+
+  .slide-dots {
+    text-align: center;
+    margin-top: 10px;
+  }
+
+  .dot {
+    height: 10px;
+    width: 10px;
+    margin: 0 4px;
+    background-color: #ffb3d1;
+    border-radius: 50%;
+    display: inline-block;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+
+  .dot.active {
+    background-color: #ff4d88;
+    transform: scale(1.2);
+  }
+
+  .dot:hover {
+    background-color: #ff1a75;
+  }
+
+  /* Forever message */
+  .forever-message {
+    margin-top: 40px;
+    margin-bottom: 30px;
+    text-align: center;
+    font-size: 1.4rem;
+    font-weight: bold;
+    color: #ff1a75;
+    text-shadow: 0 0 10px rgba(255, 77, 136, 0.5);
+    animation: glowPulse 3s ease-in-out infinite, floatMessage 4s ease-in-out infinite;
+    padding: 20px;
+    font-style: italic;
+    opacity: 0;
+  }
+
+  .forever-message.show {
+    animation: glowPulse 3s ease-in-out infinite, floatMessage 4s ease-in-out infinite, fadeInForever 1.5s ease-out forwards;
+  }
+
+  @keyframes glowPulse {
+    0%, 100% {
+      text-shadow: 0 0 10px rgba(255, 77, 136, 0.5),
+                   0 0 20px rgba(255, 77, 136, 0.3),
+                   0 0 30px rgba(255, 26, 117, 0.2);
+      color: #ff1a75;
+    }
+    50% {
+      text-shadow: 0 0 20px rgba(255, 77, 136, 0.8),
+                   0 0 30px rgba(255, 77, 136, 0.6),
+                   0 0 40px rgba(255, 26, 117, 0.4),
+                   0 0 50px rgba(255, 26, 117, 0.2);
+      color: #ff4d88;
+    }
+  }
+
+  @keyframes floatMessage {
+    0%, 100% {
+      transform: translateY(0px);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+  }
+
+  @keyframes fadeInForever {
+    from {
+      opacity: 0;
+      transform: scale(0.8) translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1) translateY(0);
+    }
+  }
 </style>
 </head>
 
@@ -313,6 +487,57 @@
         </div>
       </div>
     </div>
+
+    <div id="photoAlbum">
+      <h2 class="album-title">Our Beautiful Memories 📸</h2>
+      <div class="slideshow-container">
+        <div class="slide active">
+          <img src="photos/photo1.jpg" alt="Memory 1">
+          <div class="slide-caption">The day two strangers unknowingly became forever.</div>
+        </div>
+        <div class="slide">
+          <img src="photos/photo2.jpg" alt="Memory 2">
+          <div class="slide-caption">When destiny got everyone’s approval.</div>
+        </div>
+        <div class="slide">
+          <img src="photos/photo3.jpg" alt="Memory 3">
+          <div class="slide-caption">My heart chose you… and I said it out loud.</div>
+        </div>
+        <div class="slide">
+          <img src="photos/photo4.jpg" alt="Memory 4">
+          <div class="slide-caption">With God as witness, hand in hand, heart to heart.</div>
+        </div>
+        <div class="slide">
+          <img src="photos/photo5.jpg" alt="Memory 5">
+          <div class="slide-caption">The proposal my heart has already lived a thousand times.</div>
+        </div>
+        <div class="slide">
+          <img src="photos/photo6.jpg" alt="Memory 6">
+          <div class="slide-caption">The look that made me forget the rest of the world.</div>
+        </div>
+        <div class="slide">
+          <img src="photos/photo7.jpg" alt="Memory 7">
+          <div class="slide-caption">The day ‘mine’ became ‘ours’ forever.</div>
+        </div>
+        <div class="slide">
+          <img src="photos/photo8.jpg" alt="Memory 8">
+          <div class="slide-caption">The first of many birthdays we'll be celebrating.</div>
+        </div>
+
+        <a class="prev">❮</a>
+        <a class="next">❯</a>
+      </div>
+
+      <div class="slide-counter">
+        <span class="current-slide">1</span> / <span class="total-slides">8</span>
+      </div>
+
+      <div class="slide-dots"></div>
+    </div>
+
+    <div class="forever-message">
+      And this is just the beginning of our forever…
+    </div>
   </div>
 </div>
 
@@ -332,8 +557,11 @@ document.addEventListener("DOMContentLoaded", () => {
   const musicToggle = document.getElementById("musicToggle");
   const reasonsList = document.getElementById("reasonsList");
   const loveLetter = document.getElementById("loveLetter");
+  const photoAlbum = document.getElementById("photoAlbum");
+  const foreverMessage = document.querySelector(".forever-message");
 
   let isMusicPlaying = false;
+  let currentSlide = 0;
 
   // Reasons why I love you
   const reasons = [
@@ -344,21 +572,21 @@ document.addEventListener("DOMContentLoaded", () => {
     "You make me want to be a best person for you",
     "The way you care for me",
     "Your beautiful eyes that I could get lost in",
-    "How you always know what I want to say",
+    "You always know what I want to say",
     "The little things you do that show you care",
     "Your kisses and hugs",
-    "How you make ordinary moments feel special",
+    "Yu make ordinary moments feel special",
     "The way you hold my hand and make me feel safe",
     "Your intelligence and the way you think about things",
-    "How supportive you are of our dreams and goals",
+    "The way you put smile on my face, with just your thought",
     "Your cute quirks that make you uniquely you",
-    "The way you brighten my every day",
-    "How understanding you are with me",
+    "You brighten my every day",
+    "You love me more than words and actions",
     "The dreams we have together, big and small",
-    "How you make me feel loved every single day",
-    "Your beautiful heart and genuine soul",
-    "The way you believe in us and our future together",
-    "Simply everything about you, baccha 💖",
+    "You make me feel loved every single day",
+    "Your have most beautiful heart and genuine soul",
+    "You believe in us and our future together",
+    "Simply everything about you, baccha, you are the best💖",
   ];
 
   // Animate reasons appearing one by one
@@ -402,6 +630,19 @@ document.addEventListener("DOMContentLoaded", () => {
       setTimeout(() => {
         loveLetter.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
       }, 3000);
+
+      // Show photo album after letter animation completes (5 seconds after letter appears)
+      setTimeout(() => {
+        photoAlbum.style.display = "block";
+        setTimeout(() => {
+          photoAlbum.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+
+          // Show forever message 3 seconds after album appears
+          setTimeout(() => {
+            foreverMessage.classList.add('show');
+          }, 3000);
+        }, 500);
+      }, 5000);
     }, letterDelay);
   }
 
@@ -514,7 +755,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // Show reasons list after video ends (31 seconds)
     setTimeout(() => {
       showReasons();
-    }, 31000);
+    }, 31000); // debug 31000
 
     // play music and video safely
     bgMusic.play().then(() => {
@@ -571,7 +812,7 @@ document.addEventListener("DOMContentLoaded", () => {
       // Animate position with physics
       let x = startX;
       let y = startY;
-      const gravity = 300; // pixels per second squared
+      const gravity = 400; // pixels per second squared
       const startTime = Date.now();
       const duration = 3000; // 3 seconds
 
@@ -593,6 +834,70 @@ document.addEventListener("DOMContentLoaded", () => {
       requestAnimationFrame(animate);
     }
   }
+
+  // Photo Album Slideshow
+  const slides = document.querySelectorAll('.slide');
+  const prevBtn = document.querySelector('.prev');
+  const nextBtn = document.querySelector('.next');
+  const currentSlideSpan = document.querySelector('.current-slide');
+  const totalSlidesSpan = document.querySelector('.total-slides');
+  const dotsContainer = document.querySelector('.slide-dots');
+
+  // Create dots for each slide
+  slides.forEach((_, index) => {
+    const dot = document.createElement('span');
+    dot.className = 'dot';
+    if (index === 0) dot.classList.add('active');
+    dot.addEventListener('click', () => goToSlide(index));
+    dotsContainer.appendChild(dot);
+  });
+
+  const dots = document.querySelectorAll('.dot');
+  totalSlidesSpan.textContent = slides.length;
+
+  function showSlide(n) {
+    // Wrap around if out of bounds
+    if (n >= slides.length) currentSlide = 0;
+    if (n < 0) currentSlide = slides.length - 1;
+
+    // Remove active class from all slides and dots
+    slides.forEach(slide => slide.classList.remove('active'));
+    dots.forEach(dot => dot.classList.remove('active'));
+
+    // Add active class to current slide and dot
+    slides[currentSlide].classList.add('active');
+    dots[currentSlide].classList.add('active');
+
+    // Update counter
+    currentSlideSpan.textContent = currentSlide + 1;
+  }
+
+  function nextSlide() {
+    currentSlide++;
+    showSlide(currentSlide);
+  }
+
+  function prevSlide() {
+    currentSlide--;
+    showSlide(currentSlide);
+  }
+
+  function goToSlide(n) {
+    currentSlide = n;
+    showSlide(currentSlide);
+  }
+
+  // Event listeners for navigation
+  nextBtn.addEventListener('click', nextSlide);
+  prevBtn.addEventListener('click', prevSlide);
+
+  // Keyboard navigation
+  document.addEventListener('keydown', (e) => {
+    if (photoAlbum.style.display === 'block') {
+      if (e.key === 'ArrowLeft') prevSlide();
+      if (e.key === 'ArrowRight') nextSlide();
+    }
+  });
 });
 </script>
 
