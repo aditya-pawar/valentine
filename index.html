@@ -575,7 +575,7 @@ document.addEventListener("DOMContentLoaded", () => {
     "You always know what I want to say",
     "The little things you do that show you care",
     "Your kisses and hugs",
-    "Yu make ordinary moments feel special",
+    "You make ordinary moments feel special",
     "The way you hold my hand and make me feel safe",
     "Your intelligence and the way you think about things",
     "The way you put smile on my face, with just your thought",
@@ -678,66 +678,30 @@ document.addEventListener("DOMContentLoaded", () => {
   // "No" button moves (avoids overlapping with "Yes")
   function moveNo() {
     const rect = buttons.getBoundingClientRect();
-    const yesRect = yesBtn.getBoundingClientRect();
-    const buttonsRect = buttons.getBoundingClientRect();
+    const padding = 30;
 
-    let newLeft, newTop;
-    let attempts = 0;
-    const maxAttempts = 40;
-    const padding = 30; // Increased padding from edges to prevent clipping
+    // Pre-calculated GUARANTEED safe positions
+    // These are designed so they never overlap with the centered Yes button
+    const safePositions = [
+      // Left side positions
+      { left: padding, top: padding }, // top-left
+      { left: padding, top: rect.height - noBtn.offsetHeight - padding }, // bottom-left
+      { left: padding, top: rect.height / 2 - noBtn.offsetHeight / 2 }, // middle-left
 
-    // Define safe zones: left, right, top-left, top-right, bottom-left, bottom-right
-    const zones = [
-      // Left side
-      () => ({
-        left: padding,
-        top: padding + Math.random() * (rect.height - noBtn.offsetHeight - padding * 2)
-      }),
-      // Right side
-      () => ({
-        left: rect.width - noBtn.offsetWidth - padding,
-        top: padding + Math.random() * (rect.height - noBtn.offsetHeight - padding * 2)
-      }),
-      // Top area
-      () => ({
-        left: padding + Math.random() * (rect.width - noBtn.offsetWidth - padding * 2),
-        top: padding
-      }),
-      // Bottom area
-      () => ({
-        left: padding + Math.random() * (rect.width - noBtn.offsetWidth - padding * 2),
-        top: rect.height - noBtn.offsetHeight - padding
-      }),
-      // Random anywhere
-      () => ({
-        left: padding + Math.random() * (rect.width - noBtn.offsetWidth - padding * 2),
-        top: padding + Math.random() * (rect.height - noBtn.offsetHeight - padding * 2)
-      })
+      // Right side positions (more options for right side)
+      { left: rect.width - noBtn.offsetWidth - padding, top: padding }, // top-right
+      { left: rect.width - noBtn.offsetWidth - padding, top: rect.height - noBtn.offsetHeight - padding }, // bottom-right
+      { left: rect.width - noBtn.offsetWidth - padding, top: rect.height / 2 - noBtn.offsetHeight / 2 }, // middle-right
+      { left: rect.width - noBtn.offsetWidth - padding, top: 95 }, // right-below-yes
+      { left: rect.width - noBtn.offsetWidth - padding, top: 110 }, // right-lower
+      { left: rect.width - noBtn.offsetWidth - padding, top: 85 }, // right-just-below
     ];
 
-    do {
-      // Pick a random zone strategy
-      const zone = zones[Math.floor(Math.random() * zones.length)]();
-      newLeft = zone.left;
-      newTop = zone.top;
+    // Pick a random position from safe positions
+    const position = safePositions[Math.floor(Math.random() * safePositions.length)];
 
-      // Check if new position overlaps with Yes button
-      const noLeft = buttonsRect.left + newLeft;
-      const noRight = noLeft + noBtn.offsetWidth;
-      const noTop = buttonsRect.top + newTop;
-      const noBottom = noTop + noBtn.offsetHeight;
-
-      const overlap = !(noRight < yesRect.left ||
-                       noLeft > yesRect.right ||
-                       noBottom < yesRect.top ||
-                       noTop > yesRect.bottom);
-
-      if (!overlap) break;
-      attempts++;
-    } while (attempts < maxAttempts);
-
-    noBtn.style.left = newLeft + "px";
-    noBtn.style.top = newTop + "px";
+    noBtn.style.left = position.left + "px";
+    noBtn.style.top = position.top + "px";
     noBtn.textContent = texts[Math.floor(Math.random() * texts.length)];
   }
   noBtn.addEventListener("mouseover", moveNo);
@@ -784,7 +748,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // Confetti explosion
   function createConfetti() {
     const colors = ['❤️', '💖', '💕', '💗', '💓', '💝', '🌹', '✨', '⭐', '💫'];
-    const confettiCount = 1000;
+    const confettiCount = 500;
 
     for (let i = 0; i < confettiCount; i++) {
       const confetti = document.createElement("div");
