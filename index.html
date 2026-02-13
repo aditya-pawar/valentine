@@ -64,7 +64,7 @@
     overflow: visible;
   }
 
-  #yes { background: #ff4d88; color: white; left: 50%; transform: translateX(-50%); top: 20px; }
+  #yes { background: #ff4d88; color: white; left: 50%; transform: translateX(-50%); top: 20px; transition: all 0.3s ease; }
   #no { background: #ccc; left: 50%; transform: translateX(-50%); top: 90px; }
 
   #musicToggle {
@@ -562,6 +562,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   let isMusicPlaying = false;
   let currentSlide = 0;
+  let noClickCount = 0; // Track how many times No button is avoided
 
   // Reasons why I love you
   const reasons = [
@@ -679,6 +680,13 @@ document.addEventListener("DOMContentLoaded", () => {
   function moveNo() {
     const rect = buttons.getBoundingClientRect();
     const padding = 30;
+
+    // Increase Yes button size each time
+    noClickCount++;
+    const newScale = 1 + (noClickCount * 0.15); // Increase by 15% each time
+    const newFontSize = 1.1 + (noClickCount * 0.1); // Increase font size too
+    yesBtn.style.transform = `translateX(-50%) scale(${newScale})`;
+    yesBtn.style.fontSize = `${newFontSize}rem`;
 
     // Pre-calculated GUARANTEED safe positions
     // These are designed so they never overlap with the centered Yes button
